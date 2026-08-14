@@ -2,3 +2,7 @@
 .config/hypr/**
 .config/noctalia/**
 {{- end }}
+
+{{- if eq .chezmoi.os "darwin" }}
+.config/ghostty/themes/noctalia
+{{- end }}

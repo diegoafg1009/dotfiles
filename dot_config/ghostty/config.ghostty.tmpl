@@ -1,0 +1,13 @@
+title = Ghostty 👻
+{{ if eq .chezmoi.os "linux" }}
+theme = noctalia
+{{ else if eq .chezmoi.os "darwin" }}
+theme =
+{{ end }}
+background-opacity = 0.7
+background-blur = 15
+
+{{ if eq .chezmoi.os "linux" }}
+keybind = ctrl+insert=copy_to_clipboard
+keybind = shift+insert=paste_from_clipboard
+{{ end }}
