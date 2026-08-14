@@ -1,0 +1,63 @@
+# Environment
+
+export PATH="$HOME/.local/bin:$PATH"
+
+# Aliases
+
+{{ if eq .chezmoi.os "linux" }}
+  {{ if or (eq .chezmoi.osRelease.id "arch") (eq .chezmoi.osRelease.id "cachyos") }}
+alias zed="zeditor"
+  {{ end }}
+{{ end }}
+
+# Oh My Zsh
+
+export ZSH="$HOME/.oh-my-zsh"
+
+# Custom completions
+fpath=("$HOME/.zsh/completions" $fpath)
+
+# Oh My Posh will handle the prompt
+ZSH_THEME=""
+
+plugins=(
+  git
+  sudo
+  extract
+  history-substring-search
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+
+source "$ZSH/oh-my-zsh.sh"
+
+# History
+
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000
+SAVEHIST=10000
+
+setopt APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+
+# Oh My Posh
+
+eval "$(oh-my-posh init zsh --config "$HOME/.config/ohmyposh/themes/kushal.omp.json")"
+
+# Fastfetch
+
+command -v fastfetch >/dev/null && fastfetch
+
+# Mise
+
+eval "$(mise activate zsh)"
+
+# 1password
+
+{{ if eq .chezmoi.os "linux" }}
+export SSH_AUTH_SOCK=~/.1password/agent.sock
+{{ else if eq .chezmoi.os "darwin" }}
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+{{ end }}
