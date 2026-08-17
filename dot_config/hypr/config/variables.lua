@@ -2,8 +2,8 @@
 
 TERMINAL     = "ghostty"
 FILE_MANAGER = "dolphin"
-BROWSER      = "brave"
-EDITOR       = "zeditor"
+BROWSER      = "zen-browser"
+EDITOR       = "cursor"
 CALCULATOR   = "gnome-calculator"
 
 -- Monitors
