@@ -4,11 +4,11 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Aliases
 
-{{ if eq .chezmoi.os "linux" }}
-  {{ if or (eq .chezmoi.osRelease.id "arch") (eq .chezmoi.osRelease.id "cachyos") }}
+{{- if eq .chezmoi.os "linux" }}
+  {{- if or (eq .chezmoi.osRelease.id "arch") (eq .chezmoi.osRelease.id "cachyos") }}
 alias zed="zeditor"
-  {{ end }}
-{{ end }}
+  {{- end }}
+{{- end }}
 
 # Oh My Zsh
 
@@ -56,8 +56,8 @@ eval "$(mise activate zsh)"
 
 # 1password
 
-{{ if eq .chezmoi.os "linux" }}
+{{- if eq .chezmoi.os "linux" }}
 export SSH_AUTH_SOCK=~/.1password/agent.sock
-{{ else if eq .chezmoi.os "darwin" }}
+{{- else if eq .chezmoi.os "darwin" }}
 export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
-{{ end }}
+{{- end }}
