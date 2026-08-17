@@ -7,20 +7,21 @@ local launchPrefix = "uwsm app -- " -- if you are not using UWSM, make this empt
 ---------------------------
 
 -- Window manipulation
-hl.bind(mainMod .. " + Escape",      hl.dsp.exec_cmd("hyprctl kill"))
-hl.bind(mainMod .. " + Q",           hl.dsp.window.close())
-hl.bind(mainMod .. " + ALT + Space", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + D",           hl.dsp.window.fullscreen({ mode = 1 }))
-hl.bind(mainMod .. " + F",           hl.dsp.window.fullscreen())
-hl.bind(mainMod .. " + J",           hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + SHIFT + ESCAPE",     hl.dsp.exec_cmd("hyprctl kill"))
+hl.bind(mainMod .. " + Q",                  hl.dsp.window.close())
+hl.bind(mainMod .. " + ALT + Space",        hl.dsp.window.float({ action = "toggle" }))
+-- hl.bind(mainMod .. " + F",          hl.dsp.window.fullscreen({ mode = 1 }))
+hl.bind(mainMod .. " + SHIFT + F",          hl.dsp.window.fullscreen())
+hl.bind(mainMod .. " + J",                  hl.dsp.layout("togglesplit"))
 
 -- Change focus
-hl.bind(mainMod .. " + Left",  hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + Right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + Up",    hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + Down",  hl.dsp.focus({ direction = "down" }))
-hl.bind("ALT + Tab",           hl.dsp.window.cycle_next())
-hl.bind(mainMod .. " + Tab",   hl.dsp.exec_cmd(noctCall .. "window-switcher"))
+hl.bind(mainMod .. " + Left",               hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + Right",              hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + Up",                 hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + Down",               hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + ESCAPE",             hl.dsp.window.cycle_next())
+hl.bind(mainMod .. " + SHIFT + ESCAPE",     hl.dsp.window.cycle_next({ prev = true }))
+hl.bind(mainMod .. " + Tab",                hl.dsp.exec_cmd(noctCall .. "window-switcher"))
 
 -- Move active window around workspaces & monitors
 hl.bind(mainMod .. " + SHIFT + Up",                   hl.dsp.window.move({ direction = "u" }))
@@ -45,32 +46,12 @@ end
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag())
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize())
 
--- Zoom
-local function zoomfunction(value)
-    local zoomvalue = hl.get_config("cursor:zoom_factor")
-    if (zoomvalue + value) > 3.0 then
-        hl.config({ cursor = { zoom_factor = 3.0 } })
-    elseif (zoomvalue + value) < 1.0 then
-        hl.config({ cursor = { zoom_factor = 1.0 } })
-    else
-        hl.config({ cursor = { zoom_factor = zoomvalue + value } })
-    end
-end
-hl.bind(mainMod .. " + Minus", function() zoomfunction(-0.3) end, { repeating = true})
-hl.bind(mainMod .. " + Plus", function() zoomfunction(0.3) end, { repeating = true })
-
---# Zoom with keypad
-hl.bind(mainMod .. " + code:82", function() zoomfunction(-0.3) end, { repeating = true })
-hl.bind(mainMod .. " + code:86", function() zoomfunction(0.3) end, { repeating = true })
-
-
 ------------------
 ---- LAUNCHER ----
 ------------------
 
 hl.bind(mainMod .. " + Return",     hl.dsp.exec_cmd(launchPrefix .. TERMINAL))
-hl.bind(mainMod .. " + E",          hl.dsp.exec_cmd(launchPrefix .. FILE_MANAGER))
-hl.bind(mainMod .. " + T",          hl.dsp.exec_cmd(launchPrefix .. EDITOR))
+-- hl.bind(mainMod .. " + E",          hl.dsp.exec_cmd(launchPrefix .. FILE_MANAGER))
 -- hl.bind(mainMod .. " + C",          hl.dsp.exec_cmd(launchPrefix .. CALCULATOR))
 -- hl.bind("XF86Calculator",           hl.dsp.exec_cmd(launchPrefix .. CALCULATOR))
 hl.bind(mainMod .. " + B",          hl.dsp.exec_cmd(launchPrefix .. BROWSER))
@@ -78,8 +59,8 @@ hl.bind("CONTROL + SHIFT + Escape", hl.dsp.exec_cmd(launchPrefix .. TERMINAL .. 
 hl.bind(mainMod .. " + Z",          hl.dsp.exec_cmd(noctCall .. "settings-toggle"))
 hl.bind(mainMod .. " + X",          hl.dsp.exec_cmd(noctCall .. "panel-toggle control-center"))
 hl.bind(mainMod .. " + Space",      hl.dsp.exec_cmd(noctCall .. "panel-toggle launcher"))
-hl.bind(mainMod .. " + period",     hl.dsp.exec_cmd(noctCall .. "panel-toggle launcher /emo"))
-hl.bind(mainMod .. " + L",          hl.dsp.exec_cmd(noctCall .. "session lock"))
+hl.bind(mainMod .. " + period",     hl.dsp.exec_cmd(launchPrefix .. EDITOR))
+hl.bind(mainMod .. " + SHIFT + L",  hl.dsp.exec_cmd(noctCall .. "session lock"))
 hl.bind(mainMod .. " + ALT + C",    hl.dsp.exec_cmd(noctCall .. "panel-toggle session"))
 
 ---------------------------
@@ -128,12 +109,12 @@ local function send_shortcut_once(mods, key)
 end
 
 -- Screen Capture
-hl.bind(mainMod .. " + P",     hl.dsp.exec_cmd("hyprpicker -a -n"))
+hl.bind(mainMod .. " + ALT + P",     hl.dsp.exec_cmd("hyprpicker -a -n"))
 hl.bind("Print",               hl.dsp.exec_cmd(noctCall .. "screenshot-region"))
 hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd(noctCall .. "screenshot-fullscreen"))
 
 -- Theming and Wallpaper
-hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd(noctCall .. "panel-toggle wallpaper"))
+-- hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd(noctCall .. "panel-toggle wallpaper"))
 
 -- Clipboard
 hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd(noctCall .. "panel-toggle clipboard"))
@@ -154,20 +135,20 @@ hl.bind(mainMod .. " + X", send_shortcut_once("CTRL", "X"))
 -------------------------------
 
 -- Focus on monitors
-hl.bind(mainMod .. " + 1", hl.dsp.focus({ monitor = MONITOR1 }))
-hl.bind(mainMod .. " + 2", hl.dsp.focus({ monitor = MONITOR2 }))
-hl.bind(mainMod .. " + 3", hl.dsp.focus({ monitor = MONITOR3 }))
+-- hl.bind(mainMod .. " + 1", hl.dsp.focus({ monitor = MONITOR1 }))
+-- hl.bind(mainMod .. " + 2", hl.dsp.focus({ monitor = MONITOR2 }))
+-- hl.bind(mainMod .. " + 3", hl.dsp.focus({ monitor = MONITOR3 }))
 
 -- Focus on workspace number
 -- Absolute
 for i = 1, NUM_WPM * 2 do
     local key = i % 10
-    hl.bind(mainMod .. " + ALT + " .. key, hl.dsp.focus({ workspace = i }))
+    hl.bind(mainMod .. " + CONTROL + " .. key, hl.dsp.focus({ workspace = i }))
 end
 -- Relative
 for i = 1, NUM_WPM do
     local key = i % 10
-    hl.bind(mainMod .. " + CONTROL + " .. key, hl.dsp.focus({ workspace = "m~" .. i }))
+    hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = "m~" .. i }))
 end
 
 -- Move to adjacent workspaces and next empty on a given monitor
@@ -176,11 +157,11 @@ hl.bind(mainMod .. " + CONTROL + Left",        hl.dsp.focus({ workspace = "m-1" 
 hl.bind(mainMod .. " + CONTROL + Down",        hl.dsp.focus({ workspace = "emptym" }))
 
 -- Scroll through existing workspaces & monitors
-hl.bind(mainMod .. " + mouse_down",           hl.dsp.focus({ workspace = "e-1" }))
-hl.bind(mainMod .. " + mouse_up",             hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + CONTROL + mouse_up",   hl.dsp.focus({ workspace = "m-1" }))
-hl.bind(mainMod .. " + CONTROL + mouse_down", hl.dsp.focus({ workspace = "m+1" }))
+hl.bind(mainMod .. " + mouse_down",           hl.dsp.focus({ workspace = "m-1" }))
+hl.bind(mainMod .. " + mouse_up",             hl.dsp.focus({ workspace = "m+1" }))
+hl.bind(mainMod .. " + CONTROL + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(mainMod .. " + CONTROL + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 
 -- Special workspace (scratchpad)
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special" }))
-hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special())
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.window.move({ workspace = "special" }))
+hl.bind(mainMod .. " + E",         hl.dsp.workspace.toggle_special())
