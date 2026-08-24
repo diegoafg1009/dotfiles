@@ -54,6 +54,10 @@ command -v fastfetch >/dev/null && fastfetch
 
 eval "$(mise activate zsh)"
 
+# Golang
+
+export PATH="$PATH:$(go env GOPATH)/bin"
+
 # 1password
 
 {{- if eq .chezmoi.os "linux" }}
