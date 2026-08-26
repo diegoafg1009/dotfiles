@@ -16,8 +16,8 @@ hl.monitor({
 
 hl.monitor({
     output    = MONITOR2,
-    mode      = "preferred",
-    position  = "-1080x-240",
+    mode      = "highrr",
+    position  = "-1440x-240",
     scale     = "1",
     transform = 1,
 })
